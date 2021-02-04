@@ -1,0 +1,35 @@
+
+.resizers{
+  width: 100%;
+  height: 100;
+  background: red;
+}
+
+.resizer{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%; /*magic to turn square into circle*/
+  position: absolute;
+}
+
+
+.top-left {
+  left: -3px;
+  top: -3px;
+  cursor: nwse-resize;
+}
+.top-right {
+  right: -3px;
+  top: -3px;
+  cursor: nesw-resize;
+}
+.bottom-left {
+  left: -3px;
+  bottom: -3px;
+  cursor: nesw-resize;
+}
+.bottom-right {
+  right: -3px;
+  bottom: -3px;
+  cursor: nwse-resize;
+}

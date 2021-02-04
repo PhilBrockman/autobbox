@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {ScreenAnalyzer} from "BBoxEditor/ScreenAnalyzer"
+// import {ControlPanel} from "ControlPanel/ControlPanel"
+import {addKey, stripToBare} from "utilities/AppUtils"
+// import {initialState} from "ControlPanel/initialState"
+// import {reducer} from "utilities/AppUtils"
+import {Thumbnails} from "./Thumbnails"
+
+let json = require( "./json/21-1-29row.json")
+// let json = require( "./json/first20lcd2.json")
+// let json = require("./json/rawdata1.json")
+
+json = addKey(json)
+json = stripToBare(json)
 
 function App() {
+  const [screens , setScreenData] = React.useState(json)
+  const [screenIndex, setScreenIndex] = React.useState(0);
+  // const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
+
+  const dataSetter = (newScreen) => {
+    console.log("updating screen data (digits)")
+    let updatedScreens = [...screens]
+    updatedScreens[screenIndex] = {...newScreen}
+    setScreenData(updatedScreens)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <ScreenAnalyzer
+          screen={screens[screenIndex]}
+          updateDigitBoxes={dataSetter}
         >
-          Learn React
-        </a>
-      </header>
+      </ScreenAnalyzer>
+      <Thumbnails
+        screens={screens}
+        activeScreen={screenIndex}
+        setScreenIndex={setScreenIndex}/>
     </div>
   );
 }
+
+
+// <ControlPanel
+//   opts={sysOptions}
+//   onChange={dispatchOptions}
+//   >
+// </ControlPanel>
+// <Thumbnails
+//   activeScreen={screenIndex}
+//   screens={screens}
+//   setScreenIndex={setScreenIndex}
+//   >
+// </Thumbnails>
 
 export default App;
