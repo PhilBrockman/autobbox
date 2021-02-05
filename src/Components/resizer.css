@@ -8,10 +8,9 @@
 .resizer{
   width: 16px;
   height: 16px;
-  border-radius: 50%; /*magic to turn square into circle*/
+  border-radius: 50%;
   position: absolute;
 }
-
 
 .top-left {
   left: -3px;

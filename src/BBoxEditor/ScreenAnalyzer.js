@@ -4,6 +4,7 @@ import colorChooser from "utilities/Colors.js"
 import {humanReadableClassLabel} from 'utilities/BBoxEditor.js'
 // import React from 'react'
 import {Canvas} from "./Canvas"
+
 // import useMousePosition from "utilities/useMousePosition";
 
 function onlyUnique(value, index, self) {

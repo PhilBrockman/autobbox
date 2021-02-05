@@ -23,8 +23,7 @@ class Config {
 }
 
 const mouseDown = (event, clickBack, releaseDrag) => {
-  // event.stopPropagation()
-
+  // event.preventDefault()
   let config = new Config();
   let el = event.target;
 
@@ -40,6 +39,7 @@ const mouseDown = (event, clickBack, releaseDrag) => {
     if(Math.abs(config.starting.x - parseFloat(el.style.left )) > 3 ||
        Math.abs(config.starting.y - parseFloat(el.style.top)) > 3){
         if(releaseDrag){
+          console.log("releaseing drag style", el.style.left, el.style.top)
           releaseDrag(el)
         }
 
@@ -62,7 +62,6 @@ const mouseDown = (event, clickBack, releaseDrag) => {
       moveAt(event.pageX, event.pageY);
     }
   }
-
 
   function moveAt(pageX, pageY) {
     el.style.left = pageX - shiftX + 'px';

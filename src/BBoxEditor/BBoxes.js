@@ -1,44 +1,19 @@
 import {BoundingBox} from "./BoundingBox"
 import Draggable from "Components/draggable"
-
-const updateBBox = (el, index, template, updater, dims) => {
-  let height = parseFloat(el.style.height);
-  let width = parseFloat(el.style.width);
-  let top = parseFloat(el.style.top);
-  let left = parseFloat(el.style.left);
-
-  let updatedDigit = {
-    ...template,
-    bbox: {
-      height: (height)/dims.height,
-      width: (width)/dims.width,
-      ycent: (((height + top + top))/2)/dims.height,
-      xcent: (((width  +left + left))/2)/dims.width
-    },
-  }
-
-  updater(index, updatedDigit)
-}
+import {canvas, updateBBox} from "utilities/SAUtils"
 
 export const BBoxes = (props) => {
-  console.log("bboxes")
-  if(props.canvasDims){
-    return props.digits.map((digit, index) => {
-      const bboxUpdater = (el) => {
-        console.log("updating bbox")
-        updateBBox(el, index, digit, props.updateDigit, props.canvasDims)
-      }
+  if(props.loaded && props.screen.digits){
+    return props.screen.digits.map((digit, index) => {
       return (
         <Draggable
           key={digit.key}
           clickBack={(e) => console.log("click function", e, digit)}
-          releaseDrag={(el) => bboxUpdater(el)}
+          releaseDrag={(e) => updateBBox(e, index, props.screen, props.updateDigitBoxes)}
           >
           <BoundingBox
-            canvasDims={props.canvasDims}
-            digitInfo={digit}
+            {...props}
             digitIndex={index}
-            updateBBox={(el) => bboxUpdater(el)}
             >
           </BoundingBox>
         </Draggable>

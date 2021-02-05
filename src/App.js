@@ -19,7 +19,8 @@ function App() {
   // const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
 
   const dataSetter = (newScreen) => {
-    console.log("updating screen data (digits)")
+    console.log("current screen: ", screenIndex)
+    console.log("updating screen data (digits)", newScreen)
     let updatedScreens = [...screens]
     updatedScreens[screenIndex] = {...newScreen}
     setScreenData(updatedScreens)
@@ -30,27 +31,30 @@ function App() {
       <ScreenAnalyzer
           screen={screens[screenIndex]}
           updateDigitBoxes={dataSetter}
+          screenIndex={screenIndex}
         >
       </ScreenAnalyzer>
       <Thumbnails
-        screens={screens}
         activeScreen={screenIndex}
-        setScreenIndex={setScreenIndex}/>
+        screens={screens}
+        setScreenIndex={setScreenIndex}
+        >
+      </Thumbnails>
     </div>
   );
 }
 
+
+// <Thumbnails
+//   screens={screens}
+//   activeScreen={screenIndex}
+//   setScreenIndex={setScreenIndex}/>
 
 // <ControlPanel
 //   opts={sysOptions}
 //   onChange={dispatchOptions}
 //   >
 // </ControlPanel>
-// <Thumbnails
-//   activeScreen={screenIndex}
-//   screens={screens}
-//   setScreenIndex={setScreenIndex}
-//   >
-// </Thumbnails>
+
 
 export default App;

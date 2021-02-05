@@ -1,4 +1,5 @@
 import React, {useRef} from 'react';
+require('./resizer.css')
 
 export const Resizer = (props) => {
   let currentResizer = useRef(null)
@@ -75,9 +76,10 @@ export const Resizer = (props) => {
   }
 
   const stopResize = () => {
-    console.log("resizer", props)
-    props.updateBBox(element, props.digitIndex, props.digitInfo)
-    window.removeEventListener('mousemove', resize)
+    // console.log("resizer", props)
+    props.onRelease(element)
+    window.removeEventListener('mousemove',resize)
+    window.removeEventListener('mouseup', stopResize)
   }
 
   let className = props.active ? 'resizer-active' : "resizer-inactive";

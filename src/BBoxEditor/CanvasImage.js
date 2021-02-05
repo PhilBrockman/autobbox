@@ -8,6 +8,7 @@ export const CanvasImage = (props) => {
       src={imgCode(props.src)}
       alt="LCD screen"
       className="canvasImage"
+      onLoad={() => props.setLoadedTrue()}
       >
     </img>
     {props.children}
