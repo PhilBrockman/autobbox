@@ -19,8 +19,6 @@ function App() {
   // const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
 
   const dataSetter = (newScreen) => {
-    console.log("current screen: ", screenIndex)
-    console.log("updating screen data (digits)", newScreen)
     let updatedScreens = [...screens]
     updatedScreens[screenIndex] = {...newScreen}
     setScreenData(updatedScreens)

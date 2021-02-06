@@ -7,7 +7,7 @@ export const addKey = (data) => {
       tmp.key = ID()
       data[i][j] = tmp
     }
-
+    data[i].key = ID()
     data[i].filename = data[i].filename.replace("/", "")
   }
   return data

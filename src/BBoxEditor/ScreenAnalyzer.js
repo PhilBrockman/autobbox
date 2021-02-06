@@ -2,7 +2,7 @@ import './styles/thumbnails.css';
 import './styles/canvas.css'
 import colorChooser from "utilities/Colors.js"
 import {humanReadableClassLabel} from 'utilities/BBoxEditor.js'
-// import React from 'react'
+import React from 'react'
 import {Canvas} from "./Canvas"
 
 // import useMousePosition from "utilities/useMousePosition";
@@ -24,11 +24,15 @@ const MetaData = (props) => {
 }
 
 export const ScreenAnalyzer = (props) => {
-  return(
-    <>
-      <Canvas {...props} />
-    </>
-  );
+  if(props.screenIndex !== null){
+    return(
+      <>
+        <Canvas {...props} />
+      </>
+    );
+  } else {
+    return <> </>;
+  }
 }
 
 

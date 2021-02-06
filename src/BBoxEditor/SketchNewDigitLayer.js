@@ -15,16 +15,15 @@ export const SketchNewDigitLayer = (props) => {
   };
 
   const canvasKeyListener = React.useCallback((e) => {
-    console.log("calling back key press",history)
     let newHistory = {...history}
     if(e.key === "n"){ //make new bounding box
       e.preventDefault()
-      newHistory.key = ID();
       if(history.initialPoint){ //this is the second click
         newHistory.secondPoint = mousePosition
       } else { // this is the first click
         console.log("setting history")
         newHistory.initialPoint = mousePosition
+        newHistory.key = ID();
       }
     }
     if(e.key === "Escape"){
@@ -46,15 +45,14 @@ export const SketchNewDigitLayer = (props) => {
       if(!lastMousePosition || (
         lastMousePosition.x !== mousePosition.x &&
         lastMousePosition.y !== mousePosition.y
-          )){
-        console.log("callllling")
+      )){
         let tmp = {...history}
         tmp.secondPoint = mousePosition
         activeCallback(tmp);
         setLastMousePosition(mousePosition)
       }
     }
-  }, [history,mousePosition, activeCallback])
+  }, [history,mousePosition, activeCallback, lastMousePosition])
 
   React.useEffect(() => {
     window.addEventListener("mousemove", updateMousePosition);

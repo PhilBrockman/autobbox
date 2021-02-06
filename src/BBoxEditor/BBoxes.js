@@ -1,25 +1,69 @@
 import {BoundingBox} from "./BoundingBox"
 import Draggable from "Components/draggable"
-import {canvas, updateBBox} from "utilities/SAUtils"
+import {updateBBox} from "utilities/SAUtils"
+import {Resizer} from "Components/Resizer.js"
+import 'Components/resizer.css'
+
+let lastZ = 0;
 
 export const BBoxes = (props) => {
   if(props.loaded && props.screen.digits){
-    return props.screen.digits.map((digit, index) => {
+    let definedDigits = props.screen.digits.map((digit, index) => {
       return (
         <Draggable
           key={digit.key}
-          clickBack={(e) => console.log("click function", e, digit)}
+          clickBack={(e) => e.style.zIndex = ++lastZ}
           releaseDrag={(e) => updateBBox(e, index, props.screen, props.updateDigitBoxes)}
           >
           <BoundingBox
             {...props}
-            digitIndex={index}
+            digit={digit}
             >
+            <Resizable {...props} />
           </BoundingBox>
         </Draggable>
       )}
     )
+    let tmpDigit;
+    if(props.tmpDigit){
+      tmpDigit = <>
+        <BoundingBox
+          {...props}
+          digit={props.tmpDigit}
+          >
+        </BoundingBox>
+      </>
+    } else {
+      tmpDigit = null;
+    }
+    return (<>
+      {definedDigits}
+      {tmpDigit}
+    </>);
   } else {
     return <>loading...</>
   }
+}
+
+const Resizable = (props) => {
+  let resizers = ['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((item, index)=> {
+        return(<Resizer
+                    {...props}
+                    onRelease={(e) => updateBBox(e, props.digitIndex, props.screen, props.updateDigitBoxes)}
+                    placement={item}
+                    key={item}
+                  >
+                  *
+                </Resizer>);
+      });
+  return (
+    <>
+      <div className='resizable'>
+        {props.children}
+        <div className='resizers'>
+          {resizers}
+        </div>
+      </div>
+    </>
+  );
 }
