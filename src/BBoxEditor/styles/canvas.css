@@ -4,3 +4,14 @@
   left: 0px; */
   box-sizing: border-box;
 }
+
+
+.overlap-indicator{
+  backround-color: red;
+  color:blue;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+    border: 1px solid #ddd; /* Gray border */
+  /* border-radius: 50%; /*magic to turn square into circle */
+}

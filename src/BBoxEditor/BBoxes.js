@@ -3,6 +3,7 @@ import Draggable from "Components/draggable"
 import {updateBBox} from "utilities/SAUtils"
 import {Resizer} from "Components/Resizer.js"
 import 'Components/resizer.css'
+import {showOverlappingBoxes} from "utilities/BBoxEditorUtils"
 
 let lastZ = 0;
 
@@ -38,6 +39,7 @@ export const BBoxes = (props) => {
     }
     return (<>
       {definedDigits}
+      {showOverlappingBoxes(props.screen)}
       {tmpDigit}
     </>);
   } else {

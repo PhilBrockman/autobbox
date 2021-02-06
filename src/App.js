@@ -76,9 +76,10 @@ function App() {
         setKeyToValue={setKeyToValue}
         >
         <ScreenAnalyzer
-            screen={screens[screenIndex]}
-            updateDigitBoxes={dataSetter}
-            screenIndex={screenIndex}
+          sysOptions={sysOptions}
+          screen={screens[screenIndex]}
+          updateDigitBoxes={dataSetter}
+          screenIndex={screenIndex}
           />
       </ResponsiveKeyboard>
       <ControlPanel
