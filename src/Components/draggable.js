@@ -24,7 +24,11 @@ class Config {
 
 const mouseDown = (event, clickBack, releaseDrag) => {
   let config = new Config();
+
   let el = event.target;
+  while(!el.classList.contains("bbox")){
+    el = el.parentElement
+  }
 
   if(el.classList.contains("bbox")){
     let shiftX = event.clientX - el.getBoundingClientRect().left;
@@ -44,7 +48,7 @@ const mouseDown = (event, clickBack, releaseDrag) => {
       } else {
         console.log("click registered");
         if(clickBack){
-          clickBack(el)
+          clickBack(el);
         }
       }
     }
@@ -70,6 +74,7 @@ const mouseDown = (event, clickBack, releaseDrag) => {
     if(config.dragging){
       stopDragging();
     } else {
+      console.log("starting to drag")
       config.dragging = true;
       el.style.position = 'absolute';
 

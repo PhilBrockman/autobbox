@@ -11,8 +11,9 @@
   position: absolute;
   width: 6px;
   height: 6px;
-    border: 1px solid #ddd; /* Gray border */
+  border: 1px solid #ddd; /* Gray border */
   /* border-radius: 50%; /*magic to turn square into circle */
+  pointer-events: none;
 }
 
 .cursor {

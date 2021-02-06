@@ -5,6 +5,7 @@ import {initialState} from "Controls/initialState"
 import {ControlPanel} from "Controls/Panel"
 import {Thumbnails} from "./Thumbnails"
 import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
+import {toJSON} from "utilities/Downloader"
 
 let json = require( "./json/21-1-29row.json")
 // let json = require( "./json/first20lcd2.json")
@@ -12,6 +13,7 @@ let json = require( "./json/21-1-29row.json")
 
 json = addKey(json)
 json = stripToBare(json)
+json = json.slice(1, 3)
 
 function App() {
   const [screens , setScreenData] = React.useState(json)
@@ -78,7 +80,6 @@ function App() {
   const setActiveSelection = (value) => {
     console.log("setting the active to ", value)
     setActiveClass(value)
-      // screens[screenIndex].digits.filter(item => item.class_label === yoloLabels[value]))
   }
 
   const reselectActiveSelection = (adjustment) => {
@@ -108,6 +109,7 @@ function App() {
           activeClass={activeClass}
           />
       </ResponsiveKeyboard>
+      <input type="button" onClick={() => toJSON(screens)} value="save results"></input>
       <ControlPanel
         opts={sysOptions}
         onChange={dispatchOptions}
