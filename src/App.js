@@ -19,6 +19,10 @@ function App() {
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
   const [loaded, setLoaded] = React.useState(null);
 
+  const opt = (name) => {
+    return sysOptions.options.find(item => item.name===name);
+  }
+
   React.useEffect(() => {
     setLoaded(false)
   }, [screenIndex])
@@ -81,6 +85,7 @@ function App() {
         setKeyToValue={setKeyToValue}
         >
         <ScreenAnalyzer
+          opt={opt}
           sysOptions={sysOptions}
           screen={screens[screenIndex]}
           updateDigitBoxes={dataSetter}

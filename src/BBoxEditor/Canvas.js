@@ -43,7 +43,9 @@ export const Canvas = (props) => {
       >
         <CanvasImage
           screen={props.screen}
-          setLoadedTrue={props.setLoadedTrue}>
+          setLoadedTrue={props.setLoadedTrue}
+          opt={props.opt}
+          >
             <BBoxes
                 tmpDigit={tmpDigit}
                 {...props} />

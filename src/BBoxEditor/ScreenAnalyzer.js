@@ -18,9 +18,16 @@ const Targeter = (props) => {
   const guidingLines = (e) => {
     const v = document.querySelector('.vt');
     const h = document.querySelector('.hl');
-    if(guides && h && v && canvas()) {
-      h.setAttribute("style", "top: " + Math.min(e.pageY, canvas().height) + `px; width: ${canvas().width}px;`)
-      v.setAttribute("style", "left: " + Math.min(e.pageX, canvas().width) + `px; height: ${canvas().height}px;`)
+    
+    if(h && v && canvas()) {
+      let height = Math.min(e.pageY, canvas().height)
+      let width =  Math.min(e.pageX, canvas().width)
+      if(!guides){
+        height = 0;
+        width = 0;
+      }
+      h.setAttribute("style", "top: " + height + `px; width: ${canvas().width}px;`)
+      v.setAttribute("style", "left: " + width + `px; height: ${canvas().height}px;`)
     }
   }
 
@@ -28,20 +35,12 @@ const Targeter = (props) => {
     document.addEventListener("mousemove", guidingLines)
     return () => {document.removeEventListener("mousemove", guidingLines)}
   })
+  return (
+    <>
+      {props.children}
+    </>
+  )
 
-  if(!guides || !canvas()){
-    return (
-      <>
-        {props.children}
-      </>
-    )
-  } else {
-    return (
-      <>
-        {props.children}
-      </>
-    )
-  }
 }
 
 
