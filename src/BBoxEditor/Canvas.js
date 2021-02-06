@@ -6,11 +6,6 @@ import {canvas} from "utilities/SAUtils"
 
 export const Canvas = (props) => {
   const [tmpDigit, setTmpDigit] = React.useState(null)
-  const [loaded, setLoaded] = React.useState(null);
-
-  React.useEffect(() => {
-    setLoaded(false)
-  }, [props.screenIndex])
 
   const constructTmpDigit = (history) => {
     let p1 = history.initialPoint
@@ -48,11 +43,10 @@ export const Canvas = (props) => {
       >
         <CanvasImage
           screen={props.screen}
-          setLoadedTrue={() => setLoaded(true)}>
+          setLoadedTrue={props.setLoadedTrue}>
             <BBoxes
                 tmpDigit={tmpDigit}
-                {...props}
-                loaded={loaded} />
+                {...props} />
         </CanvasImage>
     </SketchNewDigitLayer>
   </>)

@@ -53,6 +53,22 @@ export const initialState = {
     //   keyshortcut: "x"
     // },
     {
+      label: "label left padding",
+      name: "text-left",
+      type: "range",
+      value: 30,
+      min: 0,
+      max: 100
+    },
+    {
+      label: "label bottom padding",
+      name: "text-bottom",
+      type: "range",
+      value: 30,
+      min: 0,
+      max: 100
+    },
+    {
       label: "box opacity",
       name: "box-opacity",
       type: "range",

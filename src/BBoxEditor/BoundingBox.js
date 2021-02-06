@@ -2,8 +2,6 @@ import {canvas} from 'utilities/SAUtils.js'
 import {yoloLabels} from 'utilities/AppUtils'
 import colorChooser from "utilities/Colors.js"
 
-
-
 export const BoundingBox =  (props) => {
   // console.log("control panel options", props.sysOptions.options.find(item => item.name==="show-all").value)
   let digit = props.digit;
@@ -11,12 +9,12 @@ export const BoundingBox =  (props) => {
   let width = canvas().width;
   let height = canvas().height;
 
-  let backgroundOpacity = props.sysOptions.options.find(item => item.name==="box-opacity").value/100;
-  let textOpacity = props.sysOptions.options.find(item => item.name==="text-opacity").value/100
-
   const opt = (name) => {
     return props.sysOptions.options.find(item => item.name===name);
   }
+
+  let backgroundOpacity = opt("box-opacity").value/100;
+  let textOpacity = opt("text-opacity").value/100
 
   if(!opt("show-text-labels").value){
     textOpacity = 0;
@@ -40,14 +38,13 @@ export const BoundingBox =  (props) => {
       onselectstart:"return false"
     };
 
-
   return (
     <div
       className='bbox'
       style={style}
       id={digit.key}
       >
-      <div style={{bottom:0, left:0, position:"absolute", opacity: textOpacity, color:"#FFF"}}>
+      <div style={{bottom:`${opt('text-bottom').value}%`, left:`${opt('text-left').value}%`, position:"absolute", opacity: textOpacity, color:"#FFF"}}>
         {yoloLabels[digit.class_label]}
       </div>
       {props.children}

@@ -17,6 +17,11 @@ function App() {
   const [screens , setScreenData] = React.useState(json)
   const [screenIndex, setScreenIndex] = React.useState(null);
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
+  const [loaded, setLoaded] = React.useState(null);
+
+  React.useEffect(() => {
+    setLoaded(false)
+  }, [screenIndex])
 
   const dataSetter = (newScreen) => {
     let updatedScreens = [...screens]
@@ -80,6 +85,8 @@ function App() {
           screen={screens[screenIndex]}
           updateDigitBoxes={dataSetter}
           screenIndex={screenIndex}
+          loaded={loaded}
+          setLoadedTrue={() => setLoaded(true)}
           />
       </ResponsiveKeyboard>
       <ControlPanel

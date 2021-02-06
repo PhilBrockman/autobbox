@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-
 .overlap-indicator{
   backround-color: red;
   color:blue;
@@ -14,4 +13,28 @@
   height: 6px;
     border: 1px solid #ddd; /* Gray border */
   /* border-radius: 50%; /*magic to turn square into circle */
+}
+
+.cursor {
+  z-index: 99999;
+  opacity: .7;
+  position: absolute;
+}
+
+.cursor-lines {
+  position: relative;
+}
+
+.vt {
+  position: absolute;
+  top: 0px;
+  width: 1px;
+  background: red;
+}
+
+.hl {
+  position: absolute;
+  left: 0px;
+  height: 1px;
+  background: red;
 }
