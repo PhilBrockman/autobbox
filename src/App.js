@@ -15,7 +15,7 @@ json = stripToBare(json)
 
 function App() {
   const [screens , setScreenData] = React.useState(json)
-  const [screenIndex, setScreenIndex] = React.useState(0);
+  const [screenIndex, setScreenIndex] = React.useState(null);
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
 
   const dataSetter = (newScreen) => {
@@ -34,15 +34,15 @@ function App() {
 
   return (
     <div className="App">
-
       <ResponsiveKeyboard
-        digits={screens[screenIndex].digits}
+        screen={screens[screenIndex]}
         removeDigit={removeDigit}
         >
         <ScreenAnalyzer
             screen={screens[screenIndex]}
             updateDigitBoxes={dataSetter}
             screenIndex={screenIndex}
+            setScreenIndex={setScreenIndex}
           />
       </ResponsiveKeyboard>
       <ControlPanel

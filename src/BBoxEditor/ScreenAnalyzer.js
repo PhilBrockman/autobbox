@@ -24,13 +24,9 @@ const MetaData = (props) => {
 }
 
 export const ScreenAnalyzer = (props) => {
-  if(props.screenIndex !== null){
     return(
       <Canvas {...props} />
     );
-  } else {
-    return <> </>;
-  }
 }
 
 

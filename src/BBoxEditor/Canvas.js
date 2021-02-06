@@ -8,6 +8,14 @@ export const Canvas = (props) => {
   const [tmpDigit, setTmpDigit] = React.useState(null)
   const [loaded, setLoaded] = React.useState(null);
 
+  React.useEffect(() => {
+    setLoaded(false)
+  }, [props.screenIndex])
+
+  if(props.screenIndex === null){
+    props.setScreenIndex(0)
+  }
+
   const constructTmpDigit = (history) => {
     let p1 = history.initialPoint
     let p2 = history.secondPoint
@@ -29,7 +37,6 @@ export const Canvas = (props) => {
   }
 
   const pushTmpDigitToDigits = (history) => {
-    console.log("pushing the tmp div to the digit")
     let tmp = constructTmpDigit(history)
     let screen = {...props.screen}
     screen.digits = [...props.screen.digits, tmp]
@@ -44,7 +51,7 @@ export const Canvas = (props) => {
       createDigitCallback={pushTmpDigitToDigits}
       >
         <CanvasImage
-          src={props.screen.base64}
+          screen={props.screen}
           setLoadedTrue={() => setLoaded(true)}>
             <BBoxes
                 tmpDigit={tmpDigit}
