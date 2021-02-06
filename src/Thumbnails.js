@@ -14,6 +14,7 @@ export const Thumbnails = (props) => {
           position="absolute"
           src={imgCode(img.base64)}
           alt={img.alt}
+          id={`thumbnail-${index}`}
           onClick={(e) => props.setScreenIndex(index)}
           >
           </img>

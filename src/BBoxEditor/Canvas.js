@@ -12,10 +12,6 @@ export const Canvas = (props) => {
     setLoaded(false)
   }, [props.screenIndex])
 
-  if(props.screenIndex === null){
-    props.setScreenIndex(0)
-  }
-
   const constructTmpDigit = (history) => {
     let p1 = history.initialPoint
     let p2 = history.secondPoint

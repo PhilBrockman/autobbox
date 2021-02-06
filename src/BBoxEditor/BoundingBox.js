@@ -1,4 +1,5 @@
-import {humanReadableClassLabel, canvas} from 'utilities/SAUtils.js'
+import {canvas} from 'utilities/SAUtils.js'
+import {yoloLabels} from 'utilities/AppUtils'
 import colorChooser from "utilities/Colors.js"
 let opacity = .3;
 
@@ -24,7 +25,7 @@ export const BoundingBox =  (props) => {
       id={digit.key}
       >
       <div style={{bottom:0, right:0, position:"absolute"}}>
-        {humanReadableClassLabel(digit.class_label)}
+        {yoloLabels[digit.class_label]}
       </div>
       {props.children}
     </div>

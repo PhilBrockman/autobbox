@@ -32,17 +32,53 @@ function App() {
     setScreenData(updatedScreens)
   }
 
+  const advanceScreen = () => {
+    if(screenIndex === null){
+      setScreenIndex(0)
+    } else if(screenIndex+1 < json.length){
+      setScreenIndex(screenIndex + 1)
+    } else {
+      console.log("end of the line")
+    }
+  }
+
+  const retreatScreen = () => {
+    if(screenIndex === 0){
+      setScreenIndex(null)
+    } else if(screenIndex > 0){
+      setScreenIndex(screenIndex - 1)
+    } else {
+      console.log("can't retreat")
+    }
+  }
+
+  const setKeyToValue = (key, value) => {
+    let updatedScreens = [...screens];
+    let digit = updatedScreens[screenIndex].digits.filter(item => item.key === key);
+    updatedScreens[screenIndex].digits = updatedScreens[screenIndex].digits.map(item => {
+      if(item.key === key){
+        item.class_label = value
+        return item
+      } else {
+        return item
+      }
+    })
+    setScreenData(updatedScreens)
+  }
+
   return (
     <div className="App">
       <ResponsiveKeyboard
         screen={screens[screenIndex]}
         removeDigit={removeDigit}
+        advanceScreen={advanceScreen}
+        retreatScreen={retreatScreen}
+        setKeyToValue={setKeyToValue}
         >
         <ScreenAnalyzer
             screen={screens[screenIndex]}
             updateDigitBoxes={dataSetter}
             screenIndex={screenIndex}
-            setScreenIndex={setScreenIndex}
           />
       </ResponsiveKeyboard>
       <ControlPanel

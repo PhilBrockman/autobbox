@@ -2,7 +2,6 @@ import React from 'react';
 import {imgCode} from "utilities/SAUtils"
 
 export const CanvasImage = (props) => {
-  console.log(props.screen)
   if(props.screen) {
     return (
     <>
@@ -18,7 +17,7 @@ export const CanvasImage = (props) => {
     </>);
   } else {
     return (
-      <> Loading </>
+      <> <b>Press Enter to begin.</b> </>
     );
   }
 
