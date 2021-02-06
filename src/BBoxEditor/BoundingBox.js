@@ -21,6 +21,7 @@ export const BoundingBox =  (props) => {
     <div
       className='bbox'
       style={style}
+      id={digit.key}
       >
       <div style={{bottom:0, right:0, position:"absolute"}}>
         {humanReadableClassLabel(digit.class_label)}

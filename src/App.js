@@ -4,6 +4,7 @@ import {addKey, stripToBare, reducer} from "utilities/AppUtils"
 import {initialState} from "Controls/initialState"
 import {ControlPanel} from "Controls/Panel"
 import {Thumbnails} from "./Thumbnails"
+import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 
 let json = require( "./json/21-1-29row.json")
 // let json = require( "./json/first20lcd2.json")
@@ -23,14 +24,27 @@ function App() {
     setScreenData(updatedScreens)
   }
 
+  const removeDigit = (key) => {
+    let updatedScreens = [...screens]
+    let newDigits = updatedScreens[screenIndex].digits
+    newDigits = newDigits.filter(item => item.key !== key)
+    updatedScreens[screenIndex].digits = newDigits
+    setScreenData(updatedScreens)
+  }
+
   return (
     <div className="App">
-      <ScreenAnalyzer
-          screen={screens[screenIndex]}
-          updateDigitBoxes={dataSetter}
-          screenIndex={screenIndex}
+
+      <ResponsiveKeyboard
+        digits={screens[screenIndex].digits}
+        removeDigit={removeDigit}
         >
-      </ScreenAnalyzer>
+        <ScreenAnalyzer
+            screen={screens[screenIndex]}
+            updateDigitBoxes={dataSetter}
+            screenIndex={screenIndex}
+          />
+      </ResponsiveKeyboard>
       <ControlPanel
         opts={sysOptions}
         onChange={dispatchOptions}
