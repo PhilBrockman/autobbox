@@ -46,7 +46,6 @@ const mouseDown = (event, clickBack, releaseDrag) => {
           }
 
       } else {
-        console.log("click registered");
         if(clickBack){
           clickBack(el);
         }
