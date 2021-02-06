@@ -20,7 +20,7 @@ export const initialState = {
       label: "show text (l)abels",
       name: "show-text-labels",
       type: "checkbox",
-      value: true,
+      value: false,
       keyshortcut: "l"
     },
     {
@@ -44,14 +44,14 @@ export const initialState = {
       value: true,
       keyshortcut: "g"
     },
-    // {
-    //   label: "clear active selections",
-    //   name: "clear-active-selection",
-    //   text: "(x)",
-    //   type: "button",
-    //   value: false,
-    //   keyshortcut: "x"
-    // },
+    {
+      label: "clear active selections",
+      name: "clear-active-selection",
+      text: "(x)",
+      type: "button",
+      value: false,
+      keyshortcut: "x"
+    },
     {
       label: "label left padding",
       name: "text-left",

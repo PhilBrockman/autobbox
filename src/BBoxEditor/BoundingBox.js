@@ -3,11 +3,11 @@ import {yoloLabels} from 'utilities/AppUtils'
 import colorChooser from "utilities/Colors.js"
 
 export const BoundingBox =  (props) => {
-  // console.log("control panel options", props.sysOptions.options.find(item => item.name==="show-all").value)
   let digit = props.digit;
   let bbox = digit.bbox;
   let width = canvas().width;
   let height = canvas().height;
+  let display = true;
 
   let backgroundOpacity = props.opt("box-opacity").value/100;
   let textOpacity = props.opt("text-opacity").value/100
@@ -18,11 +18,13 @@ export const BoundingBox =  (props) => {
 
   if(!props.opt("show-bboxes").value){
     backgroundOpacity = 0;
+    display = false;
   }
 
-  if(!props.opt("show-all").value) {
+  if(!props.opt("show-all").value && parseInt(digit.class_label) !== parseInt(props.activeClass)) {
     backgroundOpacity = 0;
     textOpacity = 0;
+    display = false;
   }
 
   const style = {
@@ -34,16 +36,20 @@ export const BoundingBox =  (props) => {
       onselectstart:"return false"
     };
 
-  return (
-    <div
-      className='bbox'
-      style={style}
-      id={digit.key}
-      >
-      <div style={{bottom:`${props.opt('text-bottom').value}%`, left:`${props.opt('text-left').value}%`, position:"absolute", opacity: textOpacity, color:"#FFF"}}>
-        {yoloLabels[digit.class_label]}
+  if(display){
+    return (
+      <div
+        className='bbox'
+        style={style}
+        id={digit.key}
+        >
+        <div style={{bottom:`${props.opt('text-bottom').value}%`, left:`${props.opt('text-left').value}%`, position:"absolute", opacity: textOpacity, color:"#FFF"}}>
+          {yoloLabels[digit.class_label]}
+        </div>
+        {props.children}
       </div>
-      {props.children}
-    </div>
-  )
+    )
+  } else {
+    return <></>;
+  }
 }

@@ -23,6 +23,8 @@ export const ResponsiveKeyboard = (props) => {
   const advanceScreen = props.advanceScreen;
   const retreatScreen = props.retreatScreen;
   const setKeyToValue = props.setKeyToValue;
+  const setActiveSelection = props.setActiveSelection;
+  const reselectActiveSelection = props.reselectActiveSelection;
   let digits = props.screen ? props.screen.digits : null;
 
   React.useEffect(() => {
@@ -38,24 +40,33 @@ export const ResponsiveKeyboard = (props) => {
 
       if(e.key === "\\") {
         if(matches.length > 0) {
-          removeDigit(matches[0].key)
+          removeDigit(matches[0].key);
         }
       } else if(e.key === "Enter"){
-        advanceScreen()
+        advanceScreen();
       } else if(e.key === "Shift"){
-        retreatScreen()
+        retreatScreen();
+      } else if (e.key === "x") {
+        setActiveSelection(null);
+      } else if (e.key === "ArrowRight") {
+        reselectActiveSelection(1);
+      } else if (e.key === "ArrowLeft") {
+        reselectActiveSelection(-1);
       } else if(Number.isInteger(parseInt(e.key))){
+        let value = yoloLabels.indexOf(parseInt(e.key));
         if(matches.length > 0){
-          setKeyToValue(matches[0].key, yoloLabels.indexOf(parseInt(e.key)))
+          setKeyToValue(matches[0].key, value);
+        } else {
+          setActiveSelection(value);
         }
       }
     }
 
-    document.addEventListener("keydown", keyListener)
+    document.addEventListener("keydown", keyListener);
     return () => {
-      document.removeEventListener("keydown", keyListener)
+      document.removeEventListener("keydown", keyListener);
     }
-  }, [removeDigit, advanceScreen, retreatScreen, setKeyToValue, digits])
+  }, [removeDigit, advanceScreen, retreatScreen, setKeyToValue, setActiveSelection, reselectActiveSelection, digits])
 
   return(
     <>
@@ -66,13 +77,17 @@ export const ResponsiveKeyboard = (props) => {
 
 function activeRectanglesUnderMouse(a, b){
   return a.filter(item => {
-                    let rect = document.getElementById(item.key).getBoundingClientRect();
-                    // console.log(rect)
-                    return (
-                      b.x >= rect.left &&
-                      b.x <= rect.right &&
-                      b.y >= rect.top &&
-                      b.y <= rect.bottom
-                    );
-                  });
+    let el = document.getElementById(item.key)
+    if(el){
+      let rect = el.getBoundingClientRect();
+      return (
+        b.x >= rect.left &&
+        b.x <= rect.right &&
+        b.y >= rect.top &&
+        b.y <= rect.bottom
+      );
+    } else {
+      return false;
+    }
+  });
 }

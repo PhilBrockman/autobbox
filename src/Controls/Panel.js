@@ -1,6 +1,6 @@
 import React from 'react'
 import {cpName} from "utilities/ControlPanelUtils.js"
-
+import {yoloLabels} from "utilities/AppUtils"
 
 const Input = (props) => {
   const { value, label, ...others} = props
@@ -47,10 +47,43 @@ export const ControlPanel = (props) => {
               />
   })
   return(
+    <>
+    <SelectorDisplay
+      choices={yoloLabels}
+      activeClass={props.activeClass}
+      setActiveClass={props.setActiveClass}
+    />
     <fieldset>
       <legend>Control Panel</legend>
       {panel}
     </fieldset>
+    </>
+  );
+}
+
+const SelectorDisplay = (props) => {
+  let tmp = (
+    Object.keys(props.choices).map(function(key) {
+      let className = (a, b) => {
+        if(parseInt(a) === parseInt(b)){
+          return "active"
+        } else {
+          return ""
+        }
+      }
+
+      return (<input
+              type = "button"
+              value={props.choices[key]}
+              key={`selector-${key}`}
+              onClick={()=>props.setActiveClass(key)}
+              className={className(props.activeClass, key)}
+              />)
+    })
+  );
+
+  return (
+    <>{tmp} </>
   );
 }
 

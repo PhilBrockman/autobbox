@@ -1,13 +1,13 @@
 import React from 'react';
 import {ScreenAnalyzer} from "BBoxEditor/ScreenAnalyzer"
-import {addKey, stripToBare, reducer} from "utilities/AppUtils"
+import {addKey, stripToBare, reducer, yoloLabels} from "utilities/AppUtils"
 import {initialState} from "Controls/initialState"
 import {ControlPanel} from "Controls/Panel"
 import {Thumbnails} from "./Thumbnails"
 import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 
-// let json = require( "./json/21-1-29row.json")
-let json = require( "./json/first20lcd2.json")
+let json = require( "./json/21-1-29row.json")
+// let json = require( "./json/first20lcd2.json")
 // let json = require("./json/rawdata1.json")
 
 json = addKey(json)
@@ -18,6 +18,7 @@ function App() {
   const [screenIndex, setScreenIndex] = React.useState(null);
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
   const [loaded, setLoaded] = React.useState(null);
+  const [activeClass, setActiveClass] = React.useState(null);
 
   const opt = (name) => {
     return sysOptions.options.find(item => item.name===name);
@@ -63,7 +64,6 @@ function App() {
 
   const setKeyToValue = (key, value) => {
     let updatedScreens = [...screens];
-    // let digit = updatedScreens[screenIndex].digits.filter(item => item.key === key);
     updatedScreens[screenIndex].digits = updatedScreens[screenIndex].digits.map(item => {
       if(item.key === key){
         item.class_label = value
@@ -75,6 +75,17 @@ function App() {
     setScreenData(updatedScreens)
   }
 
+  const setActiveSelection = (value) => {
+    console.log("setting the active to ", value)
+    setActiveClass(value)
+      // screens[screenIndex].digits.filter(item => item.class_label === yoloLabels[value]))
+  }
+
+  const reselectActiveSelection = (adjustment) => {
+    let newActiveClass = (activeClass + adjustment + yoloLabels.length) % yoloLabels.length;
+    setActiveClass(newActiveClass);
+  }
+
   return (
     <div className="App">
       <ResponsiveKeyboard
@@ -83,6 +94,8 @@ function App() {
         advanceScreen={advanceScreen}
         retreatScreen={retreatScreen}
         setKeyToValue={setKeyToValue}
+        setActiveSelection={setActiveSelection}
+        reselectActiveSelection={reselectActiveSelection}
         >
         <ScreenAnalyzer
           opt={opt}
@@ -92,11 +105,14 @@ function App() {
           screenIndex={screenIndex}
           loaded={loaded}
           setLoadedTrue={() => setLoaded(true)}
+          activeClass={activeClass}
           />
       </ResponsiveKeyboard>
       <ControlPanel
         opts={sysOptions}
         onChange={dispatchOptions}
+        activeClass={activeClass}
+        setActiveClass={setActiveClass}
         >
       </ControlPanel>
       <Thumbnails
@@ -108,6 +124,8 @@ function App() {
     </div>
   );
 }
+
+// <Inspector activeClass={activeClass}/>
 /*
 Array.from(document.querySelectorAll('*'))
   .reduce(function(pre, dom){
