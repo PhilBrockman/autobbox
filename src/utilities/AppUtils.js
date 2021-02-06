@@ -36,7 +36,6 @@ export const stripToBare = (data) => {
 
 export const reducer = (state, e) => {
   if(e.action === "click"){
-    console.log("click on control panel")
     let options = [...state.options]
 
     let item = options.find(item => item.name === e.target.name)

@@ -1,9 +1,8 @@
 import React from 'react';
 import {ScreenAnalyzer} from "BBoxEditor/ScreenAnalyzer"
-// import {ControlPanel} from "ControlPanel/ControlPanel"
-import {addKey, stripToBare} from "utilities/AppUtils"
-// import {initialState} from "ControlPanel/initialState"
-// import {reducer} from "utilities/AppUtils"
+import {addKey, stripToBare, reducer} from "utilities/AppUtils"
+import {initialState} from "Controls/initialState"
+import {ControlPanel} from "Controls/Panel"
 import {Thumbnails} from "./Thumbnails"
 
 let json = require( "./json/21-1-29row.json")
@@ -16,7 +15,7 @@ json = stripToBare(json)
 function App() {
   const [screens , setScreenData] = React.useState(json)
   const [screenIndex, setScreenIndex] = React.useState(0);
-  // const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
+  const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
 
   const dataSetter = (newScreen) => {
     let updatedScreens = [...screens]
@@ -32,6 +31,11 @@ function App() {
           screenIndex={screenIndex}
         >
       </ScreenAnalyzer>
+      <ControlPanel
+        opts={sysOptions}
+        onChange={dispatchOptions}
+        >
+      </ControlPanel>
       <Thumbnails
         activeScreen={screenIndex}
         screens={screens}
@@ -41,8 +45,19 @@ function App() {
     </div>
   );
 }
-
-
+/*
+Array.from(document.querySelectorAll('*'))
+  .reduce(function(pre, dom){
+    var evtObj = getEventListeners(dom)
+    Object.keys(evtObj).forEach(function (evt) {
+      if (typeof pre[evt] === 'undefined') {
+        pre[evt] = 0
+      }
+      pre[evt] += evtObj[evt].length
+    })
+    return pre
+  }, {})
+*/
 // <Thumbnails
 //   screens={screens}
 //   activeScreen={screenIndex}

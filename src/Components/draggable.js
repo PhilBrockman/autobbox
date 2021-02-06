@@ -23,66 +23,65 @@ class Config {
 }
 
 const mouseDown = (event, clickBack, releaseDrag) => {
-  // event.preventDefault()
   let config = new Config();
   let el = event.target;
 
-  let shiftX = event.clientX - el.getBoundingClientRect().left;
-  let shiftY = event.clientY - el.getBoundingClientRect().top;
+  if(el.classList.contains("bbox")){
+    let shiftX = event.clientX - el.getBoundingClientRect().left;
+    let shiftY = event.clientY - el.getBoundingClientRect().top;
 
-  function stopDragging() {
-    config.dragging = false
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('keydown', escapeToQuit);
+    function stopDragging() {
+      config.dragging = false
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('keydown', escapeToQuit);
 
+      if(Math.abs(config.starting.x - parseFloat(el.style.left )) > 3 ||
+         Math.abs(config.starting.y - parseFloat(el.style.top)) > 3){
+          if(releaseDrag){
+            releaseDrag(el)
+          }
 
-    if(Math.abs(config.starting.x - parseFloat(el.style.left )) > 3 ||
-       Math.abs(config.starting.y - parseFloat(el.style.top)) > 3){
-        if(releaseDrag){
-          console.log("releaseing drag style", el.style.left, el.style.top)
-          releaseDrag(el)
+      } else {
+        console.log("click registered");
+        if(clickBack){
+          clickBack(el)
         }
-
-    } else {
-      console.log("click registered");
-      if(clickBack){
-        clickBack(el)
       }
     }
-  }
 
-  function escapeToQuit(evt){
-    if (evt.key === "Escape" || evt.key === "Esc") {
-        stopDragging();
+    function escapeToQuit(evt){
+      if (evt.key === "Escape" || evt.key === "Esc") {
+          stopDragging();
+      }
     }
-  }
 
-  function onMouseMove(event) {
+    function onMouseMove(event) {
+      if(config.dragging){
+        moveAt(event.pageX, event.pageY);
+      }
+    }
+
+    function moveAt(pageX, pageY) {
+      el.style.left = pageX - shiftX + 'px';
+      el.style.top = pageY - shiftY + 'px';
+      config.initialPosition(pageX - shiftX , pageY - shiftY)
+    }
+
     if(config.dragging){
-      moveAt(event.pageX, event.pageY);
-    }
-  }
-
-  function moveAt(pageX, pageY) {
-    el.style.left = pageX - shiftX + 'px';
-    el.style.top = pageY - shiftY + 'px';
-    config.initialPosition(pageX - shiftX , pageY - shiftY)
-  }
-
-  if(config.dragging){
-    stopDragging();
-  } else {
-    config.dragging = true;
-    el.style.position = 'absolute';
-
-    moveAt(event.pageX, event.pageY);
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('keydown', escapeToQuit);
-
-    el.onmouseup = function(e){
       stopDragging();
-  };
+    } else {
+      config.dragging = true;
+      el.style.position = 'absolute';
+
+      moveAt(event.pageX, event.pageY);
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('keydown', escapeToQuit);
+
+      el.onmouseup = function(e){
+        stopDragging();
+      };
+    }
   }
 };
 
