@@ -38,12 +38,6 @@ const Targeter = (props) => {
   } else {
     return (
       <>
-        <div className="cursor">
-          <div className="cursor-lines">
-            <div className="vt" />
-            <div className="hl" />
-          </div>
-        </div>
         {props.children}
       </>
     )

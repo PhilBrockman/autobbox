@@ -6,8 +6,8 @@ import {ControlPanel} from "Controls/Panel"
 import {Thumbnails} from "./Thumbnails"
 import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 
-let json = require( "./json/21-1-29row.json")
-// let json = require( "./json/first20lcd2.json")
+// let json = require( "./json/21-1-29row.json")
+let json = require( "./json/first20lcd2.json")
 // let json = require("./json/rawdata1.json")
 
 json = addKey(json)

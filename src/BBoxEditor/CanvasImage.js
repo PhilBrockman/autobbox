@@ -5,6 +5,13 @@ export const CanvasImage = (props) => {
   if(props.screen) {
     return (
     <>
+
+      <div className="cursor">
+        <div className="cursor-lines">
+          <div className="vt" />
+          <div className="hl" />
+        </div>
+      </div>
       <img
         id="screen"
         src={imgCode(props.screen.base64)}
