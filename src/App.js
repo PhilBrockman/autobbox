@@ -54,7 +54,7 @@ function App() {
 
   const setKeyToValue = (key, value) => {
     let updatedScreens = [...screens];
-    let digit = updatedScreens[screenIndex].digits.filter(item => item.key === key);
+    // let digit = updatedScreens[screenIndex].digits.filter(item => item.key === key);
     updatedScreens[screenIndex].digits = updatedScreens[screenIndex].digits.map(item => {
       if(item.key === key){
         item.class_label = value

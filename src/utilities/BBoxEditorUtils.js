@@ -10,12 +10,10 @@ export const imgCode = (b64) =>{
   return "data:image/png;base64,"+b64;
 }
 
-export function showOverlappingBoxes(screen){
+export function showOverlappingBoxes(screen, bool){
   let currScreen = document.getElementById("screen")
-  console.log("screen", currScreen)
-  if(currScreen){
+  if(currScreen && bool){
     let digits = screen.digits.filter((digit, index) => hasOverlappingBuddy(digit, screen.digits, index))
-    console.log("digits", digits)
     let overlappers = digits.map((digit,index) =>
       <div key={index}
            style= {{top: digit.bbox.ycent * currScreen.height - 3,

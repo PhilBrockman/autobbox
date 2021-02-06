@@ -10,13 +10,6 @@ export const initialState = {
     //   keyshortcut: "n"
     // },
     {
-      label: "show non-active (b)orders",
-      name: "show-non-active-borders",
-      type: "checkbox",
-      value: false,
-      keyshortcut: "b"
-    },
-    {
       label: "show (a)ll",
       name: "show-all",
       type: "checkbox",
@@ -24,31 +17,52 @@ export const initialState = {
       keyshortcut: "a"
     },
     {
-      label: "show all (r)esizers",
-      name: "show-all-resizers",
+      label: "show text (l)abels",
+      name: "show-text-labels",
+      type: "checkbox",
+      value: true,
+      keyshortcut: "l"
+    },
+    {
+      label: "show (b)ounding boxes",
+      name: "show-bboxes",
       type:"checkbox",
-      value: false,
-      keyshortcut: "r"
+      value: true,
+      keyshortcut: "b"
     },
     {
-      label: "clear active selections",
-      name: "clear-active-selection",
-      text: "(x)",
-      type: "button",
-      value: false,
-      keyshortcut: "x"
+      label: "show (o)verlapping rects",
+      name: "show-overlapping",
+      type:"checkbox",
+      value: true,
+      keyshortcut: "o"
     },
     {
-      label: "active opacity",
-      name: "active-opacity",
+      label: "show (g)uiding lines",
+      name: "show-guides",
+      type:"checkbox",
+      value: true,
+      keyshortcut: "g"
+    },
+    // {
+    //   label: "clear active selections",
+    //   name: "clear-active-selection",
+    //   text: "(x)",
+    //   type: "button",
+    //   value: false,
+    //   keyshortcut: "x"
+    // },
+    {
+      label: "box opacity",
+      name: "box-opacity",
       type: "range",
       value: 30,
       min: 0,
       max: 100
     },
     {
-      label: "inactive opacity",
-      name: "inactive-opacity",
+      label: "text label opacity",
+      name: "text-opacity",
       type: "range",
       value: 70,
       min: 0,

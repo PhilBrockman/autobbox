@@ -39,7 +39,7 @@ export const BBoxes = (props) => {
     }
     return (<>
       {definedDigits}
-      {showOverlappingBoxes(props.screen)}
+      {showOverlappingBoxes(props.screen, props.sysOptions.options.find(item => item.name==="show-overlapping").value)}
       {tmpDigit}
     </>);
   } else {

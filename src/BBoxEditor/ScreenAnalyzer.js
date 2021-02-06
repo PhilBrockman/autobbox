@@ -1,15 +1,15 @@
 import './styles/thumbnails.css';
 import './styles/canvas.css'
-import colorChooser from "utilities/Colors.js"
+// import colorChooser from "utilities/Colors.js"
 // import {humanReadableClassLabel} from 'utilities/BBoxEditor.js'
 import React from 'react'
 import {Canvas} from "./Canvas"
 
 // import useMousePosition from "utilities/useMousePosition";
 
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
+// function onlyUnique(value, index, self) {
+//   return self.indexOf(value) === index;
+// }
 
 // const MetaData = (props) => {
 //   let labels =  props.screen.digits.map(digit => digit.class_label)
@@ -25,8 +25,19 @@ function onlyUnique(value, index, self) {
 
 export const ScreenAnalyzer = (props) => {
     return(
-      <Canvas {...props} />
+      <Targeter sysOptions={props.sysOptions}>
+        <Canvas {...props} />
+      </Targeter>
     );
+}
+
+const Targeter = (props) => {
+  let guides = props.sysOptions.options.find(item => item.name==="show-guides").value;
+  return (
+    <>
+      {props.children}
+    </>
+  )
 }
 
 
