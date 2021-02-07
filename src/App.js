@@ -7,16 +7,31 @@ import {Thumbnails} from "./Thumbnails"
 import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 import {toJSON} from "utilities/Downloader"
 
-let json = require( "./json/21-1-29row.json")
+let fname = "21-2-6 svhn"
+// let json = require( "./json/21-1-29row.json")
 // let json = require( "./json/first20lcd2.json")
 // let json = require("./json/rawdata1.json")
+let json = require(`./json/${fname}.json`)
 
 json = addKey(json)
 json = stripToBare(json)
-json = json.slice(1, 3)
+json = json.slice(0, 50)
+
+function useStickyState(defaultValue, key) {
+  const [value, setValue] = React.useState(() => {
+    const stickyValue = window.localStorage.getItem(key);
+    return stickyValue !== null
+      ? JSON.parse(stickyValue)
+      : defaultValue;
+  });
+  React.useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
+}
 
 function App() {
-  const [screens , setScreenData] = React.useState(json)
+  const [screens , setScreenData] = useStickyState(json, "screensData");
   const [screenIndex, setScreenIndex] = React.useState(null);
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
   const [loaded, setLoaded] = React.useState(null);
@@ -25,12 +40,12 @@ function App() {
   const opt = (name) => {
     return sysOptions.options.find(item => item.name===name);
   }
-
   React.useEffect(() => {
     setLoaded(false)
   }, [screenIndex])
 
   const dataSetter = (newScreen) => {
+    console.log("setting new data")
     let updatedScreens = [...screens]
     updatedScreens[screenIndex] = {...newScreen}
     setScreenData(updatedScreens)

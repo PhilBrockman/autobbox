@@ -11,6 +11,7 @@ export const imgCode = (b64) =>{
 }
 
 export const updateBBox = (el, index, screen, updater) => {
+  console.log("updateing bbox")
   let height = parseFloat(el.style.height);
   let width = parseFloat(el.style.width);
   let top = parseFloat(el.style.top);

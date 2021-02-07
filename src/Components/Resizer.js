@@ -76,14 +76,12 @@ export const Resizer = (props) => {
   }
 
   const stopResize = () => {
-    // console.log("resizer", props)
+    console.log("released", element)
     props.onRelease(element)
     window.removeEventListener('mousemove',resize)
     window.removeEventListener('mouseup', stopResize)
   }
-
   let className = props.active ? 'resizer-active' : "resizer-inactive";
-
   return (
     <div
       ref={currentResizer}

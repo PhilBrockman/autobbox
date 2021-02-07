@@ -20,7 +20,9 @@ export const BBoxes = (props) => {
             {...props}
             digit={digit}
             >
-            <Resizable {...props} />
+            <Resizable
+              onRelease={(e) => updateBBox(e, index, props.screen, props.updateDigitBoxes)}
+            {...props} />
           </BoundingBox>
         </Draggable>
       )}
@@ -51,7 +53,6 @@ const Resizable = (props) => {
   let resizers = ['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((item, index)=> {
         return(<Resizer
                     {...props}
-                    onRelease={(e) => updateBBox(e, props.digitIndex, props.screen, props.updateDigitBoxes)}
                     placement={item}
                     key={item}
                   >
