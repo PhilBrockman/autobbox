@@ -25,6 +25,7 @@ export const ResponsiveKeyboard = (props) => {
   const setKeyToValue = props.setKeyToValue;
   const setActiveSelection = props.setActiveSelection;
   const reselectActiveSelection = props.reselectActiveSelection;
+  const deleteCurrentScreen = props.deleteCurrentScreen;
   let digits = props.screen ? props.screen.digits : null;
 
   React.useEffect(() => {
@@ -52,6 +53,8 @@ export const ResponsiveKeyboard = (props) => {
         reselectActiveSelection(1);
       } else if (e.key === "ArrowLeft") {
         reselectActiveSelection(-1);
+      } else if (e.key === '\''){
+        deleteCurrentScreen();
       } else if(Number.isInteger(parseInt(e.key))){
         let value = yoloLabels.indexOf(parseInt(e.key));
         if(matches.length > 0){
@@ -66,7 +69,7 @@ export const ResponsiveKeyboard = (props) => {
     return () => {
       document.removeEventListener("keydown", keyListener);
     }
-  }, [removeDigit, advanceScreen, retreatScreen, setKeyToValue, setActiveSelection, reselectActiveSelection, digits])
+  }, [removeDigit, deleteCurrentScreen, advanceScreen, retreatScreen, setKeyToValue, setActiveSelection, reselectActiveSelection, digits])
 
   return(
     <>

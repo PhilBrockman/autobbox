@@ -8,6 +8,10 @@ import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 import {toJSON} from "utilities/Downloader"
 
 let fname = "21-2-6 svhn"
+fname = "21-1-29row-2"
+fname = "21-2-7 lcds"
+fname = "21-2-10 (1)lcds"
+fname = "21-2-10 (2) lcds"
 // let json = require( "./json/21-1-29row.json")
 // let json = require( "./json/first20lcd2.json")
 // let json = require("./json/rawdata1.json")
@@ -15,7 +19,7 @@ let json = require(`./json/${fname}.json`)
 
 json = addKey(json)
 json = stripToBare(json)
-json = json.slice(0, 50)
+// json = json.slice(0, 50)
 
 function useStickyState(defaultValue, key) {
   const [value, setValue] = React.useState(() => {
@@ -31,7 +35,7 @@ function useStickyState(defaultValue, key) {
 }
 
 function App() {
-  const [screens , setScreenData] = useStickyState(json, "screensData");
+  const [screens , setScreenData] = React.useState(json)//useStickyState(json, `${fname}`);
   const [screenIndex, setScreenIndex] = React.useState(null);
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
   const [loaded, setLoaded] = React.useState(null);
@@ -102,6 +106,13 @@ function App() {
     setActiveClass(newActiveClass);
   }
 
+  const deleteCurrentScreen = () => {
+      let newScreens = [...screens];
+      newScreens.splice(screenIndex, 1);
+      setScreenData(newScreens);
+      retreatScreen();
+  }
+
   return (
     <div className="App">
       <ResponsiveKeyboard
@@ -112,6 +123,7 @@ function App() {
         setKeyToValue={setKeyToValue}
         setActiveSelection={setActiveSelection}
         reselectActiveSelection={reselectActiveSelection}
+        deleteCurrentScreen={deleteCurrentScreen}
         >
         <ScreenAnalyzer
           opt={opt}

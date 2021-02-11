@@ -43,6 +43,7 @@ export const BoundingBox =  (props) => {
         style={style}
         id={digit.key}
         >
+        <div>{digit.confidence}</div>
         <div style={{bottom:`${props.opt('text-bottom').value}%`, left:`${props.opt('text-left').value}%`, position:"absolute", opacity: textOpacity, color:"#FFF"}}>
           {yoloLabels[digit.class_label]}
         </div>
