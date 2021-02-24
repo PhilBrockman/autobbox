@@ -7,14 +7,7 @@ import {Thumbnails} from "./Thumbnails"
 import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 import {toJSON} from "utilities/Downloader"
 
-let fname = "21-2-6 svhn"
-fname = "21-1-29row-2"
-fname = "21-2-7 lcds"
-fname = "21-2-10 (1)lcds"
-fname = "21-2-10 (2) lcds"
-// let json = require( "./json/21-1-29row.json")
-// let json = require( "./json/first20lcd2.json")
-// let json = require("./json/rawdata1.json")
+let fname = `bright screen/DS from 0 (21-02-24)-(21)-(50)-1614203434`
 let json = require(`./json/${fname}.json`)
 
 json = addKey(json)
@@ -35,7 +28,7 @@ function useStickyState(defaultValue, key) {
 }
 
 function App() {
-  const [screens , setScreenData] = React.useState(json)//useStickyState(json, `${fname}`);
+  const [screens , setScreenData] =  useStickyState(json, `${fname}`); //React.useState(json)//
   const [screenIndex, setScreenIndex] = React.useState(null);
   const [sysOptions, dispatchOptions] = React.useReducer( reducer, initialState)
   const [loaded, setLoaded] = React.useState(null);
@@ -136,7 +129,7 @@ function App() {
           activeClass={activeClass}
           />
       </ResponsiveKeyboard>
-      <input type="button" onClick={() => toJSON(screens)} value="save results"></input>
+      <input type="button" onClick={() => toJSON(screens, fname)} value="save results"></input>
       <ControlPanel
         opts={sysOptions}
         onChange={dispatchOptions}

@@ -17,10 +17,17 @@ export const initialState = {
       keyshortcut: "a"
     },
     {
+      label: "(c)onfidence values",
+      name: "confidence",
+      type: "checkbox",
+      value: false,
+      keyshortcut: "c"
+    },
+    {
       label: "show text (l)abels",
       name: "show-text-labels",
       type: "checkbox",
-      value: false,
+      value: true,
       keyshortcut: "l"
     },
     {
@@ -41,7 +48,7 @@ export const initialState = {
       label: "show (g)uiding lines",
       name: "show-guides",
       type:"checkbox",
-      value: true,
+      value: false,
       keyshortcut: "g"
     },
     {

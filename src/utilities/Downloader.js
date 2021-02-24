@@ -10,12 +10,12 @@ function genTxt(dict){
   return (out.join('\n'));
 }
 
-export function toJSON(d){
+export function toJSON(d, outname){
   var zip = new JSZip()
-  zip.file("data/label_map.txt", ['1', '2', '3', '4', '5', '6', '7', '8', '9', '90'].join("\n"))
+  zip.file(`${outname}/label_map.txt`, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '90'].join("\n"))
 
   for (var i = 0; i < d.length; i++){
-    let prefix = `data/${d[i].filename}`
+    let prefix = `${outname}/${d[i].filename}`
     zip.file(prefix+".jpg", d[i].base64, {base64: true});
     let txtContent = []
     for (var j = 0; j < d[i].digits.length; j++){
@@ -27,7 +27,7 @@ export function toJSON(d){
 
   zip.generateAsync({type:"blob"})
   .then(function(content) {
-    saveAs(content, "labeled data.zip");
+    saveAs(content, `${outname}.zip`);
   })
 
 }

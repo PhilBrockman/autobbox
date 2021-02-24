@@ -5,9 +5,11 @@ import {Canvas} from "./Canvas";
 import {canvas} from "utilities/SAUtils"
 
 export const ScreenAnalyzer = (props) => {
+  let numDigits = props.screen ? `Num digits: ${props.screen.digits.length} `  : null;
     return(
       <Targeter sysOptions={props.sysOptions}>
         <Canvas {...props} />
+        {numDigits}
       </Targeter>
     );
 }
@@ -18,7 +20,7 @@ const Targeter = (props) => {
   const guidingLines = (e) => {
     const v = document.querySelector('.vt');
     const h = document.querySelector('.hl');
-    
+
     if(h && v && canvas()) {
       let height = Math.min(e.pageY, canvas().height)
       let width =  Math.min(e.pageX, canvas().width)

@@ -27,6 +27,16 @@ export const BoundingBox =  (props) => {
     display = false;
   }
 
+
+  let bboxConfidence = props.opt("confidence").value
+            ? digit.confidence
+            : "";
+
+  let bboxLabel = props.opt("show-text-labels").value
+            ? yoloLabels[digit.class_label]
+            : "";
+
+                    //
   const style = {
       top: height*(bbox.ycent - bbox.height/2),
       left: width*(bbox.xcent - bbox.width/2),
@@ -43,9 +53,9 @@ export const BoundingBox =  (props) => {
         style={style}
         id={digit.key}
         >
-        <div>{digit.confidence}</div>
+        <div>{bboxConfidence}</div>
         <div style={{bottom:`${props.opt('text-bottom').value}%`, left:`${props.opt('text-left').value}%`, position:"absolute", opacity: textOpacity, color:"#FFF"}}>
-          {yoloLabels[digit.class_label]}
+          {bboxLabel}
         </div>
         {props.children}
       </div>
