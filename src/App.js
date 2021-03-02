@@ -7,7 +7,7 @@ import {Thumbnails} from "./Thumbnails"
 import {ResponsiveKeyboard} from "./BBoxEditor/ResponsiveKeyboard"
 import {toJSON} from "utilities/Downloader"
 
-let fname = "bright screen/DS from 50 (21-02-25)-(04)-(21)-1614226918"
+let fname = "DS from 0 (21-02-28)-(05)-(32)-1614490369"
 let json = require(`./json/${fname}.json`)
 
 json = addKey(json)
