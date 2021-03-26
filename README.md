@@ -12,7 +12,7 @@ To continue to make progress, I developed a hacky clone of Roboflow's annotation
 Key Shortcuts:
 * enter: next image
 * shift: previous image
-* \: deletes bounding box that is moused over
+* \\: deletes bounding box that is moused over
 * n: start (first time) or stop (second time) drawing a bounding box
 
 Other Key shortcuts:
