@@ -16,4 +16,4 @@ Other Key shortcuts:
 * view settings box beneath the labeling area
 
 Note:
-The image data is written to LocalStorage to help data persist between refreshes. My hack to switch to a new json file is to use "localStorage.clear()" in the console window. All of this hassle could have been avoided had the developer not dogheadedly pursued JSON as the universal data language.
+The image data is written to LocalStorage to help data persist between refreshes. My hack to switch to a new json file is to use "localStorage.clear()" in the console window. All of this hassle could have been avoided in the first place had the developer not dogheadedly pursued JSON as the universal data language.
