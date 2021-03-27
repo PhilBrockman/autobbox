@@ -1,7 +1,5 @@
 # Annotating images with React
 
-I'm exposing this code more for the sake of transparency above all else.
-
 Using point and click actions to capture objects inside of their bounding boxes bothered my hand. Using a trackpad, I could "point" with ease but "click"ing started to literally hurt.
 
 A labeled dataset of 7 segment digits ain't worth all that.
