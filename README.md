@@ -4,7 +4,7 @@ Using point and click actions to capture objects inside of their bounding boxes 
 
 A labeled dataset of 7 segment digits ain't worth all that.
 
-To continue to make progress, I developed a hacky clone of Roboflow's annotation. The clone's biggest upside is that I could label bother-free. The motion of clicking, holding, and ALSO dragging was too much. I replace this motion with a key tap, mouse move, key tap which I found I could sustain pain-free. (I change class by mouseovering the box and pressing 0-9.)
+To continue to make progress, I developed a hacky clone of Roboflow's annotation software. The clone's biggest upside is that I could label bother-free. The motion of clicking, holding, and ALSO dragging was too much. I replace this motion with a key tap, mouse move, key tap which I found I could sustain pain-free. (I change class by mouseovering the box and pressing 0-9.)
 
 Key Shortcuts:
 * enter: next image
